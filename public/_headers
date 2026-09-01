@@ -1,0 +1,5 @@
+/*
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+  Origin-Agent-Cluster: ?1
+  Permissions-Policy: tools=(self)
