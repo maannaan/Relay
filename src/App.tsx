@@ -19,6 +19,21 @@ function horizonPosition(risk: Risk, index: number) {
   return 25 + index * 25
 }
 
+const STORAGE_KEY = 'relay-demo-state-v1'
+
+function loadPersistedLocations(): LocationState[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) return seedLocations()
+    const parsed = JSON.parse(raw)
+    const seed = seedLocations()
+    if (!Array.isArray(parsed) || parsed.length !== seed.length || parsed.some((l) => !l?.id || !Array.isArray(l?.risks))) return seed
+    return parsed
+  } catch {
+    return seedLocations()
+  }
+}
+
 function readinessFor(location: LocationState) {
   const critical = location.risks.filter((risk) => risk.severity === 'critical')
   const unowned = critical.filter((risk) => risk.status === 'unowned')
@@ -29,7 +44,7 @@ function readinessFor(location: LocationState) {
 }
 
 function App() {
-  const [locations, setLocations] = useState<LocationState[]>(seedLocations)
+  const [locations, setLocations] = useState<LocationState[]>(loadPersistedLocations)
   const [activeLocationId, setActiveLocationId] = useState('northstar')
   const [selectedRiskId, setSelectedRiskId] = useState('fridge')
   const [activity, setActivity] = useState('Relay is standing by for the closing handoff.')
@@ -42,6 +57,9 @@ function App() {
 
   const locationsRef = useRef(locations)
   useEffect(() => { locationsRef.current = locations }, [locations])
+  useEffect(() => {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(locations)) } catch { /* private mode or storage disabled — demo still works, just won't survive a reload */ }
+  }, [locations])
   const activeLocationIdRef = useRef(activeLocationId)
   useEffect(() => { activeLocationIdRef.current = activeLocationId }, [activeLocationId])
 

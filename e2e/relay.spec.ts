@@ -114,3 +114,15 @@ test('ownership horizon markers select the corresponding risk', async ({ page })
   await page.locator('.horizon-marker', { hasText: 'Till discrepancy' }).click()
   await expect(page.locator('.focus-panel h2')).toContainText('Till discrepancy')
 })
+
+test('progress survives a page reload (persisted, not just in-memory)', async ({ page }) => {
+  await page.getByRole('button', { name: 'Draft a safe handoff' }).click()
+  await expect(page.locator('.draft-card')).toContainText('REVIEW REQUIRED')
+
+  await page.reload()
+  await expect(page.locator('.draft-card')).toContainText('REVIEW REQUIRED')
+
+  await page.getByRole('button', { name: 'Reset demo' }).click()
+  await page.reload()
+  await expect(page.getByRole('button', { name: 'Draft a safe handoff' })).toBeVisible()
+})
