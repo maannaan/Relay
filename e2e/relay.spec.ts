@@ -8,9 +8,16 @@ test.describe('WebMCP tool execution (stubbed modelContext)', () => {
   test.beforeEach(async ({ page }) => {
     await page.addInitScript(() => {
       (window as any).__tools = {}
-      ;(document as any).modelContext = {
-        registerTool: async (tool: any) => { (window as any).__tools[tool.name] = tool },
+      const modelContext = {
+        registerTool: async function (tool: any) {
+          // Mimic a native WebIDL-bound method: throws if called detached
+          // from its receiver, the way document.modelContext.registerTool
+          // does in a real WebMCP browser (caught a real bug this way).
+          if (this !== modelContext) throw new TypeError("Failed to execute 'registerTool' on 'ModelContext': Illegal invocation")
+          ;(window as any).__tools[tool.name] = tool
+        },
       }
+      ;(document as any).modelContext = modelContext
     })
     await page.goto('/?demo=1')
     await expect(page.locator('.status-row')).toContainText('WebMCP tools connected')
