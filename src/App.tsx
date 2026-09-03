@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { seedLocations, proposals, type LocationState, type Risk } from './data'
-import { IconGrid, IconNotes, IconRadar, IconRelay, IconAudit, IconCheck, IconAlert, IconArrowRight, IconClock, IconTerminal, IconRefresh, IconEye, IconWand, IconSparkline } from './icons'
+import { IconGrid, IconNotes, IconRadar, IconRelay, IconAudit, IconCheck, IconAlert, IconArrowRight, IconClock, IconTerminal, IconRefresh, IconEye, IconWand, IconSparkline, RelayLogoMark } from './icons'
 
 type ToolStatus = 'unavailable' | 'registering' | 'ready' | 'error'
 type ToolLogEntry = { time: string; name: string; ok: boolean; detail: string }
@@ -336,7 +336,7 @@ function App() {
 
   return <main className="app-shell">
     <aside className="sidebar">
-      <div className="brand"><div className="brand-mark">R</div><span>relay</span></div>
+      <div className="brand"><div className="brand-mark"><RelayLogoMark size={17} /></div><span>relay</span></div>
       <div className="location-switcher">
         {locations.map((loc) => {
           const r = readinessFor(loc)

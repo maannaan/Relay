@@ -2,6 +2,18 @@ type IconProps = { size?: number; className?: string }
 
 const base = (size = 16) => ({ width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const })
 
+export function RelayLogoMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 200 200" fill="none">
+      <g transform="translate(100,100)" fill="#14210f">
+        <path d="M -52 -8 C -52 -30, -34 -46, -12 -46 L 30 -46 C 34 -46, 36 -42, 33 -39 L 14 -20 C 11 -17, 6 -17, 3 -20 L -8 -31 C -20 -31, -30 -21, -30 -8 Z" />
+        <path d="M 52 8 C 52 30, 34 46, 12 46 L -30 46 C -34 46, -36 42, -33 39 L -14 20 C -11 17, -6 17, -3 20 L 8 31 C 20 31, 30 21, 30 8 Z" />
+        <circle cx="0" cy="0" r="7" />
+      </g>
+    </svg>
+  )
+}
+
 export function IconGrid({ size, className }: IconProps) { return <svg {...base(size)} className={className}><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" /></svg> }
 export function IconNotes({ size, className }: IconProps) { return <svg {...base(size)} className={className}><path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" /><path d="M14 3v5h5" /><path d="M8 13h8M8 17h5" /></svg> }
 export function IconRadar({ size, className }: IconProps) { return <svg {...base(size)} className={className}><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none" /><path d="M12 3v3M21 12h-3" /></svg> }
