@@ -198,7 +198,8 @@ function App() {
     setToolStatus('registering')
     const controller = new AbortController()
     const register = async () => {
-      const registerTool = document.modelContext!.registerTool
+      const modelContext = document.modelContext!
+      const registerTool = modelContext.registerTool.bind(modelContext)
       await registerTool({
         name: 'list_location_summaries',
         description: 'List every café location Relay tracks with a summary of its handoff readiness. Use this to decide which location needs attention before drilling into shift context.',
