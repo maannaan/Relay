@@ -5,6 +5,10 @@
 
 Relay is a shift-handoff workspace for multi-location cafés, built on the browser-native **WebMCP** API. It turns scattered closing notes into visible, accountable commitments, and it will not call a handoff safe while any high-impact risk lacks an owner, a deadline, and a fallback plan.
 
+| Blocked — the missing hour | Manager review | Verified |
+|---|---|---|
+| ![Blocked state](docs/screenshots/01-blocked-missing-hour.png) | ![Manager review](docs/screenshots/02-manager-review.png) | ![Verified state](docs/screenshots/03-verified.png) |
+
 ## What Relay actually is, in plain terms
 
 Picture a café closing for the night. Whoever locks up writes a note: *"walk-in fridge stayed at 9°C after the door was fixed, called the repair company, they might come tomorrow."* That note gets logged somewhere — a group chat, a paper log, a shared doc — and then the shift ends. Nothing about that note *forces* anyone to actually check the fridge before the café reopens. The person who wrote it assumes someone will read it. The next morning's opener might not see it until it's too late.
